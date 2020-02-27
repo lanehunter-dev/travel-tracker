@@ -1,8 +1,12 @@
-/* This is an example of using Sass, otherwise plain CSS works too*/
 $primary-background: #F2F2F2;
+$accent-color: #01F2A9;
+$border-color: #322153;
+$display-font: "Arvo";
+$body-font: "Roboto";
 
 * {
-  font-family: "Arvo";
+  color: $border-color;
+  font-family: $display-font;
   font-weight: 400;
   margin: 0;
   padding: 0;
@@ -10,27 +14,116 @@ $primary-background: #F2F2F2;
 }
 
 body {
-
+  display: grid;
+  grid-template-areas:
+    "header header header"
+    "left middle right";
+  grid-template-rows: 5em 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   background-color: $primary-background;
 }
 
 .bold {
-  font-family: "Arvo";
+  font-family: $display-font;
   font-weight: 700;
 }
 
 header {
   background: white;
-  border-right: .3em solid #00F2A9;
+  grid-area: header;
   padding: 1em;
   display: flex;
+  width: 100%;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.23);
 }
 
 header h1 {
   cursor: pointer;
+  color: $border-color;
 }
 
 .icon {
   max-height: 2.5em;
   padding-left: 8em;
+}
+
+button {
+  // font-family: $body-font;
+  font-size: 1em;
+  background: $accent-color;
+  border-radius: .3em;
+  padding: 1em;
+  margin-top: .3em;
+  margin-left: 10%;
+  width: 80%;
+  height: 3em;
+  border: none;
+}
+
+button:hover {
+  transition: 300ms;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.16);
+}
+
+main {
+  display: flex;
+  grid-area: left middle right;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: calc(100vh - 5em);
+}
+
+.left {
+  // justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  grid-area: left;
+}
+
+.right {
+  width: 100%;
+  height: 100%;
+}
+
+
+form {
+  width: 100%;
+  padding: 3em 0em 4.5em;
+  // align-items: ;
+  border-radius: .3em;
+  flex-flow: wrap;
+  background: white;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+h2 {
+  padding-left: 10%;
+  color: $border-color;
+  border-left: .2em solid $accent-color;
+}
+
+h4 {
+  padding-left: calc(10% + .2em);
+  margin: 1em 0;
+  color: $border-color
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  flex-flow: wrap;
+}
+
+input {
+  font-family: $body-font;
+  font-size: 1em;
+  background: $primary-background;
+  border-radius: .3em;
+  padding: 1em;
+  margin: 1.2em 0;
+  width: 80%;
+  height: 3em;
+  border: none;
+  border-bottom: 2px solid $border-color;
 }

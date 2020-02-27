@@ -14,18 +14,6 @@ describe("traveler", function() {
   });
 
   it("should have default parameters", function() {
-    console.log(traveler);
-    expect(traveler).to.deep.equal({
-      id: 1,
-      name: "Ham Leadbeater",
-      travelerType: "relaxer",
-      username: "traveler1",
-      password: "travel2020"
-    })
-  });
-  
-  it("should have default parameters", function() {
-    console.log(traveler);
     expect(traveler).to.deep.equal({
       id: 1,
       name: "Ham Leadbeater",
