@@ -1,4 +1,4 @@
-{
+let travelerData = {
   travelers: [
     {
     "id": 1,
@@ -27,3 +27,5 @@
     }
   ]
 }
+
+export default travelerData;
