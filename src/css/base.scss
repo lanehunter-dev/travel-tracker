@@ -1,6 +1,36 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: pink;
+$primary-background: #F2F2F2;
+
+* {
+  font-family: "Arvo";
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
+
   background-color: $primary-background;
+}
+
+.bold {
+  font-family: "Arvo";
+  font-weight: 700;
+}
+
+header {
+  background: white;
+  border-right: .3em solid #00F2A9;
+  padding: 1em;
+  display: flex;
+}
+
+header h1 {
+  cursor: pointer;
+}
+
+.icon {
+  max-height: 2.5em;
+  padding-left: 8em;
 }
