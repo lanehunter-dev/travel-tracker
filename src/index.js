@@ -1,13 +1,17 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you import jQuery into a JS file if you use jQuery in that file
 import $ from 'jquery';
 
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
+import domUpdates from './domUpdates.js';
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/057-placeholder.svg'
 
-console.log('This is the JavaScript entry file - your code begins here.');
+
+$('.login-btn').click(attemptLogin);
+
+function attemptLogin() {
+  event.preventDefault();
+  if ($('#username-field').val() === 'ass') {
+    console.log(5);
+  }
+  domUpdates.showUsers();
+}
