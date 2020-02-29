@@ -5,6 +5,7 @@ class Traveler {
     this.travelerType = travelerData.travelerType;
     this.username = "traveler" + this.id;
     this.password = "travel2020";
+    this.trips = [];
   }
 
 }

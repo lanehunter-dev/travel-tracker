@@ -10,21 +10,35 @@
       <h1>Freudian<span class="bold">Trip</span></h1>
     </header>
     <main>
-      <div class="left">
+      <section class="left">
+      </section>
+      <section class="middle">
 
-      </div>
-      <form class="login" method="post">
-        <h2>Welcome!</h2>
-        <h4>Please log in</h4>
-        <div class="input-container">
-          <input type="text" name="username" id="username-field" placeholder="Username" required>
-          <input type="text" name="password" id="password-field" placeholder="Password" required>
+        <div id="traveler-dashboard">
+          <div class="dashboard-header">
+            <h2>Welcome, Ham!</h2>
+            <h4>Your Trips:</h4>
+          </div>
+          <nav class="dashboard-header-nav">
+          </nav>
+          <div class="dashboard-body">
+            
+          </div>
+
         </div>
-        <button class="login-btn">Log in</button>
-      </form>
-      <div class="right">
 
-      </div>
+        <form class="login">
+          <h2>Welcome!</h2>
+          <h4>Please log in</h4>
+          <div class="input-container">
+            <input type="text" name="username" id="username-field" placeholder="Username" required>
+            <input type="text" name="password" id="password-field" placeholder="Password" required>
+          </div>
+          <button class="login-btn">Log in</button>
+        </form>
+      </section>
+      <section class="right">
+      </section>
     </main>
 
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->

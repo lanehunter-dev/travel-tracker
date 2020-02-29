@@ -1,10 +1,10 @@
 import chai from "chai";
-import Traveler from "../src/traveler.js";
+import dataParser from "../src/dataParser.js";
 import travelerData from "../data/traveler-data-sample.js"
 const expect = chai.expect;
 let traveler;
 
-describe("traveler", function() {
+describe("dataParser", function() {
   beforeEach(function() {
     traveler = new Traveler(travelerData.travelers[0]);
   })
