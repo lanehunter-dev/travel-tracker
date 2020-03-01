@@ -12,6 +12,7 @@ class Traveler {
     let data = await dataParser.fetchTripsForAllTravelers();
     data = data.trips.filter(trip => trip.userID === this.id);
     data.forEach(trip => this.trips.push(trip))
+    console.log(await this.trips);
   }
   getMyDestinations(destinationData) {
     return this.trips.forEach(trip => {
@@ -25,7 +26,7 @@ class Traveler {
       totalCost += (place.estimatedFlightCostPerPerson * trip.travelers);
       return totalCost;
     }, 0)
-    return subTotal + (subTotal * .1)
+    return subTotal;
   }
 }
 
