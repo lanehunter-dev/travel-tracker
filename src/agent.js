@@ -6,7 +6,7 @@ class Agent {
     this.destinations = destinationData;
     this.travelers = travelerData;
   }
-  getPendingTripRequests() {
+  getPendingTrips() {
     return this.trips.filter(trip => trip.status === "pending")
   }
   async getTotalTripCostPerYear() {

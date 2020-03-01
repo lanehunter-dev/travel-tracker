@@ -13,7 +13,7 @@ class Traveler {
     let data = await dataParser.fetchTripsForAllTravelers();
     data = data.filter(trip => trip.userID === this.id);
     data.forEach(trip => this.trips.push(trip))
-    console.log(await this.trips);
+    return data;
   }
   getMyDestinations(destinationData) {
     return this.trips.forEach(trip => {
@@ -29,9 +29,22 @@ class Traveler {
     }, 0)
     return subTotal;
   }
-  findPastTrips() {
+  getPastTrips() {
     return this.trips.filter(trip => {
       return moment(trip.date, 'YYYY/MM/DD') < Date.now();
+    })
+  }
+  getUpcomingTrips() {
+    return this.trips.filter(trip => {
+      return moment(trip.date, 'YYYY/MM/DD') > Date.now();
+    })
+  }
+  getPendingTrips() {
+    return this.trips.filter(trip => trip.status === "pending")
+  }
+  getCurrentTrips() {
+    return this.trips.filter(trip => {
+      return moment(trip.date, 'YYYY/MM/DD') < Date.now() && moment(trip.date, 'YYYY/MM/DD').add(trip.duration, 'days') > Date.now();
     })
   }
 }
