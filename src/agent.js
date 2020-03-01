@@ -1,4 +1,5 @@
 import dataParser from './dataParser.js'
+import moment from 'moment';
 
 class Agent {
   constructor(tripData, destinationData, travelerData) {
@@ -17,6 +18,14 @@ class Agent {
       return totalCost;
     }, 0);
     return subTotal;
+  }
+  getCurrentTrips() {
+    return this.trips.filter(trip => {
+      return moment(trip.date, 'YYYY/MM/DD') < Date.now() && moment(trip.date, 'YYYY/MM/DD').add(trip.duration, 'days') > Date.now();
+    })
+  }
+  getNumTravelersOnTripsToday() {
+    return this.getCurrentTrips().length;
   }
 }
 

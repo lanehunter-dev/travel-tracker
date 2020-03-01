@@ -17,8 +17,8 @@ let tripData;
 $('.login-btn').click(attemptLogin);
 $('h1').click(async function() {
   // console.log(m < m2);
-  console.log(await currentUser.getTrips());
-  console.log(currentUser.getCurrentTrips());
+  // console.log(await currentUser.getTrips());
+  console.log(currentUser.getNumTravelersOnTripsToday());
   ;
   // console.log(currentUser.getCurrentTrips());
 

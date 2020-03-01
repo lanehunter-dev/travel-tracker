@@ -34,6 +34,11 @@ class Traveler {
       return moment(trip.date, 'YYYY/MM/DD') < Date.now();
     })
   }
+  getCurrentTrips() {
+    return this.trips.filter(trip => {
+      return moment(trip.date, 'YYYY/MM/DD') < Date.now() && moment(trip.date, 'YYYY/MM/DD').add(trip.duration, 'days') > Date.now();
+    })
+  }
   getUpcomingTrips() {
     return this.trips.filter(trip => {
       return moment(trip.date, 'YYYY/MM/DD') > Date.now();
@@ -41,11 +46,6 @@ class Traveler {
   }
   getPendingTrips() {
     return this.trips.filter(trip => trip.status === "pending")
-  }
-  getCurrentTrips() {
-    return this.trips.filter(trip => {
-      return moment(trip.date, 'YYYY/MM/DD') < Date.now() && moment(trip.date, 'YYYY/MM/DD').add(trip.duration, 'days') > Date.now();
-    })
   }
 }
 
