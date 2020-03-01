@@ -5,8 +5,6 @@ class Traveler {
     this.id = travelerData.id;
     this.name = travelerData.name;
     this.travelerType = travelerData.travelerType;
-    this.username = "traveler" + this.id;
-    this.password = "travel2020";
     this.trips = [];
     this.destinations = [];
   }
@@ -21,14 +19,14 @@ class Traveler {
     })
   }
   getTotalTripCostPerYear() {
-    return this.trips.reduce((totalCost, trip) => {
+    let subTotal = this.trips.reduce((totalCost, trip) => {
       let place = this.destinations.find(destination => destination.id === trip.destinationID);
       totalCost += (place.estimatedLodgingCostPerDay * trip.duration);
       totalCost += (place.estimatedFlightCostPerPerson * trip.travelers);
       return totalCost;
     }, 0)
+    return subTotal + (subTotal * .1)
   }
-
 }
 
 export default Traveler;
