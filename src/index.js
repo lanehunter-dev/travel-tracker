@@ -1,4 +1,7 @@
 import $ from 'jquery';
+import moment from 'moment'
+let m = moment('01/01/1990', 'MM/DD/YYYY')
+let m2 = moment('01/05/1990', 'MM/DD/YYYY');
 
 import './css/base.scss';
 import domUpdates from './domUpdates.js';
@@ -13,9 +16,12 @@ let tripData;
 
 $('.login-btn').click(attemptLogin);
 $('h1').click(async function() {
-  console.log(currentUser);
-  console.log(await currentUser.getPendingTripRequests());
-  console.log(await currentUser.getTotalTripCostPerYear());
+  // console.log(m < m2);
+  await currentUser.getTrips();
+  console.log(currentUser.findPastTrips());
+
+  // console.log(await currentUser.getPendingTripRequests());
+  // console.log(await currentUser.getTotalTripCostPerYear());
 })
 
 async function attemptLogin() {

@@ -12,7 +12,7 @@ class Agent {
   async getTotalTripCostPerYear() {
     let subTotal = this.trips.reduce((totalCost, trip) => {
       let place = this.destinations.find(destination => destination.id === trip.destinationID);
-      totalCost += (place.estimatedLodgingCostPerDay * trip.duration);
+      totalCost += (place.estimatedLodgingCostPerDay * trip.duration * trip.travelers);
       totalCost += (place.estimatedFlightCostPerPerson * trip.travelers);
       return totalCost;
     }, 0);
