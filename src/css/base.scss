@@ -93,8 +93,8 @@ main {
 }
 
 form {
+  // display: none;
   padding: 3em 0em 4.5em;
-  display: none;
   width: 40%;
   border-radius: .3em;
   flex-flow: wrap;
@@ -103,6 +103,7 @@ form {
 }
 
 #traveler-dashboard {
+  display: none;
   overflow: scroll;
   background: white;
   height: 75vh;

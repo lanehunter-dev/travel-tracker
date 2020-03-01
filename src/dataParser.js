@@ -14,11 +14,17 @@ const dataParser = {
     const data = await response.json()
     return data;
   },
+  fetchAllDestinations: async () => {
+    const response = await fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/1911/destinations/destinations');
+      const data = await response.json()
+      return data.destinations;
+  },
   filterTripsByTraveler: async (travelerNum) => {
     let data = await dataParser.fetchTripsForAllTravelers();
-    console.log(data);
-
     return data.trips.filter(trip => trip.userID === travelerNum);
+  },
+  findTripDestination: async (trip) => {
+
   },
 }
 

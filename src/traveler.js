@@ -1,3 +1,5 @@
+import dataParser from './dataParser.js'
+
 class Traveler {
   constructor(travelerData) {
     this.id = travelerData.id;
@@ -6,6 +8,25 @@ class Traveler {
     this.username = "traveler" + this.id;
     this.password = "travel2020";
     this.trips = [];
+    this.destinations = [];
+  }
+  async getTrips() {
+    let data = await dataParser.fetchTripsForAllTravelers();
+    data = data.trips.filter(trip => trip.userID === this.id);
+    data.forEach(trip => this.trips.push(trip))
+  }
+  getMyDestinations(destinationData) {
+    return this.trips.forEach(trip => {
+      this.destinations.push(destinationData.find(destination => destination.id === trip.destinationID))
+    })
+  }
+  getTotalTripCostPerYear() {
+    return this.trips.reduce((totalCost, trip) => {
+      let place = this.destinations.find(destination => destination.id === trip.destinationID);
+      totalCost += (place.estimatedLodgingCostPerDay * trip.duration);
+      totalCost += (place.estimatedFlightCostPerPerson * trip.travelers);
+      return totalCost;
+    }, 0)
   }
 
 }
