@@ -25,15 +25,12 @@ const domUpdates = {
         </div>
         <div class="dashboard-info">
           <h2 class="bold underline">${destination.destination}</h2>
-          <p class="bold">Estimated Lodging Cost Per Day:</p>
-          <p>$${destination.estimatedLodgingCostPerDay} (per person)</p>
-          <p class="bold">Estimated Flight Cost Per Person:</p>
-          <p>$${destination.estimatedFlightCostPerPerson}</p>
         </div>
       </div>`)
     });
   },
   displayPastTrips: (currentUser) => {
+    $('.dashboard-body').children().hide();
     let pastDestinations = currentUser.getPastDestinations()
     if (pastDestinations.length) {
       $('.dashboard-body').children().hide();
@@ -44,10 +41,6 @@ const domUpdates = {
           </div>
           <div class="dashboard-info">
             <h2 class="bold underline">${destination.destination}</h2>
-            <p class="bold">Estimated Lodging Cost Per Day:</p>
-            <p>$${destination.estimatedLodgingCostPerDay} (per person)</p>
-            <p class="bold">Estimated Flight Cost Per Person:</p>
-            <p>$${destination.estimatedFlightCostPerPerson}</p>
           </div>
         </div>`)
       })
@@ -57,6 +50,7 @@ const domUpdates = {
     }
   },
   displayCurrentTrips: (currentUser) => {
+    $('.dashboard-body').children().hide();
     let currentDestinations = currentUser.getCurrentDestinations()
     if (currentDestinations.length) {
       $('.dashboard-body').children().hide();
@@ -67,10 +61,6 @@ const domUpdates = {
           </div>
           <div class="dashboard-info">
             <h2 class="bold underline">${destination.destination}</h2>
-            <p class="bold">Estimated Lodging Cost Per Day:</p>
-            <p>$${destination.estimatedLodgingCostPerDay} (per person)</p>
-            <p class="bold">Estimated Flight Cost Per Person:</p>
-            <p>$${destination.estimatedFlightCostPerPerson}</p>
           </div>
         </div>`)
       })
@@ -80,6 +70,7 @@ const domUpdates = {
     }
   },
   displayPendingTrips: (currentUser) => {
+    $('.dashboard-body').children().hide();
     let pendingDestinations = currentUser.getPendingDestinations()
     if (pendingDestinations.length) {
       $('.dashboard-body').children().hide();
@@ -90,10 +81,6 @@ const domUpdates = {
           </div>
           <div class="dashboard-info">
             <h2 class="bold underline">${destination.destination}</h2>
-            <p class="bold">Estimated Lodging Cost Per Day:</p>
-            <p>$${destination.estimatedLodgingCostPerDay} (per person)</p>
-            <p class="bold">Estimated Flight Cost Per Person:</p>
-            <p>$${destination.estimatedFlightCostPerPerson}</p>
           </div>
         </div>`)
       })
@@ -103,6 +90,7 @@ const domUpdates = {
     }
   },
   displayUpcomingTrips: (currentUser) => {
+    $('.dashboard-body').children().hide();
     let upcomingDestinations = currentUser.getUpcomingDestinations()
     if (upcomingDestinations.length) {
       $('.dashboard-body').children().hide();
@@ -113,10 +101,6 @@ const domUpdates = {
           </div>
           <div class="dashboard-info">
             <h2 class="bold underline">${destination.destination}</h2>
-            <p class="bold">Estimated Lodging Cost Per Day:</p>
-            <p>$${destination.estimatedLodgingCostPerDay} (per person)</p>
-            <p class="bold">Estimated Flight Cost Per Person:</p>
-            <p>$${destination.estimatedFlightCostPerPerson}</p>
           </div>
         </div>`)
       })
