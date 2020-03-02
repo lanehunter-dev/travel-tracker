@@ -14,7 +14,7 @@ const domUpdates = {
       <h1>Welcome, ${currentUser.name}!</h1>`);
     $('.dashboard-header').append(`
       <h3>Total you've spent on trips this year: $${currentUser.getTotalTripCostPerYear()}</h3>
-      <h3 class='bold'>Your Trips:</h3>`)
+      <h3 class='bold center filter-display'>Your Trips:</h3>`)
   },
   displayUserTrips: (currentUser) => {
     $('.dashboard-body').children().hide();
@@ -28,6 +28,7 @@ const domUpdates = {
         </div>
       </div>`)
     });
+    $('.filter-display').html(`<h3 class='bold center filter-display'>Your Trips (all):</h3>`)
   },
   displayPastTrips: (currentUser) => {
     $('.dashboard-body').children().hide();
@@ -48,6 +49,7 @@ const domUpdates = {
       $('.dashboard-body').children().hide();
       $('.dashboard-body').append(`<h1 class='underline center'>No past trips</h1>`)
     }
+    $('.filter-display').html(`<h3 class='bold center filter-display'>Your Trips (past):</h3>`)
   },
   displayCurrentTrips: (currentUser) => {
     $('.dashboard-body').children().hide();
@@ -68,6 +70,7 @@ const domUpdates = {
       $('.dashboard-body').children().hide();
       $('.dashboard-body').append(`<h1 class='underline center'>No currently active trips</h1>`)
     }
+    $('.filter-display').html(`<h3 class='bold center filter-display'>Your Trips (current):</h3>`)
   },
   displayPendingTrips: (currentUser) => {
     $('.dashboard-body').children().hide();
@@ -88,6 +91,7 @@ const domUpdates = {
       $('.dashboard-body').children().hide();
       $('.dashboard-body').append(`<h1 class='underline center'>No currently pending trips</h1>`)
     }
+    $('.filter-display').html(`<h3 class='bold center filter-display'>Your Trips (pending):</h3>`)
   },
   displayUpcomingTrips: (currentUser) => {
     $('.dashboard-body').children().hide();
@@ -108,6 +112,7 @@ const domUpdates = {
       $('.dashboard-body').children().hide();
       $('.dashboard-body').append(`<h1 class='underline center'>No upcoming trips</h1>`)
     }
+    $('.filter-display').html(`<h3 class='bold center filter-display'>Your Trips (upcoming):</h3>`)
   }
 };
 
