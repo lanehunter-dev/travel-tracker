@@ -1,8 +1,7 @@
 * **Please check if the PR fulfills these requirements**
-- [ ] The commit message follows our guidelines
+- [ ] PR uses multiple, atomic commits
 - [ ] Tests for the changes have been added (for bug fixes / features)
-- [ ] Docs have been added / updated (for bug fixes / features)
-
+- [ ] PR buddy has been requested to review this PR
 
 * **What kind of change does this PR introduce?** (Bug fix, feature, docs update, ...)
 
