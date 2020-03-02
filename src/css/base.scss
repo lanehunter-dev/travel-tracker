@@ -5,12 +5,12 @@ $display-font: "Arvo";
 $body-font: "Roboto";
 
 * {
-  color: $border-color;
   font-family: $display-font;
   font-weight: 400;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: $border-color;
 }
 
 body {
@@ -40,7 +40,6 @@ header {
 
 header h1 {
   cursor: pointer;
-  color: $border-color;
 }
 
 .icon {
@@ -93,7 +92,7 @@ main {
 }
 
 form {
-  // display: none;
+  display: none;
   padding: 3em 0em 4.5em;
   width: 40%;
   border-radius: .3em;
@@ -102,8 +101,34 @@ form {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
+.card {
+  background: white;
+  padding: 3em;
+  border-radius: .3em;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  transition: 300ms;
+}
+
+.card:hover {
+  transform: scale(1.01);
+  transition: 300ms;
+}
+
+.card-image {
+  width: 30em;
+}
+
+.dashboard-entry {
+  margin-top: 1em;
+  display: flex;
+}
+
+.dashboard-info {
+  margin-left: 2em;
+}
+
 #traveler-dashboard {
-  display: none;
+  // display: none;
   overflow: scroll;
   background: white;
   height: 75vh;
@@ -123,19 +148,61 @@ form {
 }
 
 #traveler-dashboard h2 {
-  // background: pink;
 }
 
-h2 {
+.dashboard-header h2 {
   padding-left: 10%;
-  color: $border-color;
   border-left: .2em solid $accent-color;
+}
+
+.dashboard-image {
+  position: relative;
+  cursor: pointer;
+  transition: 300ms;
+}
+
+.overlay-text {
+  color: white;
+  font-weight: bold;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: 45%;
+  opacity: 0;
+  z-index: 10;
+  transition: 300ms;
+}
+
+.overlay {
+  transition: 300ms;
+  background: rgba(255,255,255,0.7);
+  opacity: 0;
+  position: absolute;
+  height: 99%;
+  width: 100%;
+}
+
+.dashboard-image:hover .overlay-text {
+  transition: 300ms;
+  opacity: 1;
+}
+
+.dashboard-image:hover .overlay {
+  transition: 300ms;
+  background: rgba(255,255,255,0.7);
+  position: absolute;
+  height: 99%;
+  width: 100%;
+  opacity: 1;
+}
+
+.dashboard-image:hover {
+  transition: 300ms;
 }
 
 h4 {
   padding-left: calc(10% + .2em);
   margin: 1em 0;
-  color: $border-color
 }
 
 .input-container {
