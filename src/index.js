@@ -23,8 +23,11 @@ $('#trip-filter').change(() => {
   } else if (value === 'past') {
     domUpdates.displayPastTrips(currentUser)
   } else if (value === 'current') {
+    domUpdates.displayCurrentTrips(currentUser)
   } else if (value === 'upcoming') {
+    domUpdates.displayUpcomingTrips(currentUser)
   } else if (value === 'pending') {
+    domUpdates.displayPendingTrips(currentUser)
   }
 })
 

@@ -36,7 +36,6 @@ class Traveler {
   }
   getPastDestinations() {
     let pastTrips = this.getPastTrips()
-    console.log(pastTrips);
     let pastDestinations = [];
     pastTrips.forEach(trip => {
       pastDestinations.push(this.destinations.find(destination => {
@@ -50,13 +49,43 @@ class Traveler {
       return moment(trip.date, 'YYYY/MM/DD') < Date.now() && moment(trip.date, 'YYYY/MM/DD').add(trip.duration, 'days') > Date.now();
     })
   }
+  getCurrentDestinations() {
+    let currentTrips = this.getCurrentTrips()
+    let currentDestinations = [];
+    currentTrips.forEach(trip => {
+      currentDestinations.push(this.destinations.find(destination => {
+        return destination.id === trip.destinationID
+      }))
+    })
+    return currentDestinations;
+  }
   getUpcomingTrips() {
     return this.trips.filter(trip => {
       return moment(trip.date, 'YYYY/MM/DD') > Date.now();
     })
   }
+  getUpcomingDestinations() {
+    let upcomingTrips = this.getUpcomingTrips()
+    let upcomingDestinations = [];
+    upcomingTrips.forEach(trip => {
+      upcomingDestinations.push(this.destinations.find(destination => {
+        return destination.id === trip.destinationID
+      }))
+    })
+    return upcomingDestinations;
+  }
   getPendingTrips() {
     return this.trips.filter(trip => trip.status === "pending")
+  }
+  getPendingDestinations() {
+    let pendingTrips = this.getPendingTrips()
+    let pendingDestinations = [];
+    pendingTrips.forEach(trip => {
+      pendingDestinations.push(this.destinations.find(destination => {
+        return destination.id === trip.destinationID
+      }))
+    })
+    return pendingDestinations;
   }
 }
 

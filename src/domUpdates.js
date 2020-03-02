@@ -21,10 +21,6 @@ const domUpdates = {
     currentUser.destinations.forEach(destination => {
       $('.dashboard-body').append(`<div class="dashboard-entry card">
         <div class="dashboard-image">
-          <div class="overlay-text">
-            <h1 class="bold">Book a trip to ${destination.destination}!</h1>
-          </div>
-          <div class="overlay"></div>
           <img src=${destination.image} class="card-image">
         </div>
         <div class="dashboard-info">
@@ -39,16 +35,11 @@ const domUpdates = {
   },
   displayPastTrips: (currentUser) => {
     let pastDestinations = currentUser.getPastDestinations()
-    console.log(pastDestinations);
     if (pastDestinations.length) {
       $('.dashboard-body').children().hide();
       pastDestinations.forEach(destination => {
         $('.dashboard-body').append(`<div class="dashboard-entry card">
           <div class="dashboard-image">
-            <div class="overlay-text">
-              <h1 class="bold">Book a trip to ${destination.destination}!</h1>
-            </div>
-            <div class="overlay"></div>
             <img src=${destination.image} class="card-image">
           </div>
           <div class="dashboard-info">
@@ -66,7 +57,73 @@ const domUpdates = {
     }
   },
   displayCurrentTrips: (currentUser) => {
-    let currentTrips = currentUser.getCurrentTrips()
+    let currentDestinations = currentUser.getCurrentDestinations()
+    if (currentDestinations.length) {
+      $('.dashboard-body').children().hide();
+      currentDestinations.forEach(destination => {
+        $('.dashboard-body').append(`<div class="dashboard-entry card">
+          <div class="dashboard-image">
+            <img src=${destination.image} class="card-image">
+          </div>
+          <div class="dashboard-info">
+            <h2 class="bold underline">${destination.destination}</h2>
+            <p class="bold">Estimated Lodging Cost Per Day:</p>
+            <p>$${destination.estimatedLodgingCostPerDay} (per person)</p>
+            <p class="bold">Estimated Flight Cost Per Person:</p>
+            <p>$${destination.estimatedFlightCostPerPerson}</p>
+          </div>
+        </div>`)
+      })
+    } else {
+      $('.dashboard-body').children().hide();
+      $('.dashboard-body').append(`<h1 class='underline center'>No currently active trips</h1>`)
+    }
+  },
+  displayPendingTrips: (currentUser) => {
+    let pendingDestinations = currentUser.getPendingDestinations()
+    if (pendingDestinations.length) {
+      $('.dashboard-body').children().hide();
+      pendingDestinations.forEach(destination => {
+        $('.dashboard-body').append(`<div class="dashboard-entry card">
+          <div class="dashboard-image">
+            <img src=${destination.image} class="card-image">
+          </div>
+          <div class="dashboard-info">
+            <h2 class="bold underline">${destination.destination}</h2>
+            <p class="bold">Estimated Lodging Cost Per Day:</p>
+            <p>$${destination.estimatedLodgingCostPerDay} (per person)</p>
+            <p class="bold">Estimated Flight Cost Per Person:</p>
+            <p>$${destination.estimatedFlightCostPerPerson}</p>
+          </div>
+        </div>`)
+      })
+    } else {
+      $('.dashboard-body').children().hide();
+      $('.dashboard-body').append(`<h1 class='underline center'>No currently pending trips</h1>`)
+    }
+  },
+  displayUpcomingTrips: (currentUser) => {
+    let upcomingDestinations = currentUser.getUpcomingDestinations()
+    if (upcomingDestinations.length) {
+      $('.dashboard-body').children().hide();
+      upcomingDestinations.forEach(destination => {
+        $('.dashboard-body').append(`<div class="dashboard-entry card">
+          <div class="dashboard-image">
+            <img src=${destination.image} class="card-image">
+          </div>
+          <div class="dashboard-info">
+            <h2 class="bold underline">${destination.destination}</h2>
+            <p class="bold">Estimated Lodging Cost Per Day:</p>
+            <p>$${destination.estimatedLodgingCostPerDay} (per person)</p>
+            <p class="bold">Estimated Flight Cost Per Person:</p>
+            <p>$${destination.estimatedFlightCostPerPerson}</p>
+          </div>
+        </div>`)
+      })
+    } else {
+      $('.dashboard-body').children().hide();
+      $('.dashboard-body').append(`<h1 class='underline center'>No upcoming trips</h1>`)
+    }
   }
 };
 
