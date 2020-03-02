@@ -16,9 +16,18 @@ let tripData;
 autoLogin()
 
 $('.login-btn').click(attemptLogin);
-$('#trip-filter').change(function() {
-  domUpdates.displayPastTrips(currentUser);
+$('#trip-filter').change(() => {
+  let value = $('#trip-filter').children("option:selected").val();
+  if (value === 'all') {
+    domUpdates.displayUserTrips(currentUser)
+  } else if (value === 'past') {
+    domUpdates.displayPastTrips(currentUser)
+  } else if (value === 'current') {
+  } else if (value === 'upcoming') {
+  } else if (value === 'pending') {
+  }
 })
+
 
 async function attemptLogin() {
   event.preventDefault();
@@ -63,7 +72,7 @@ async function loginAgency(tripData, destinationData) {
 async function autoLogin() {
   destinationData = await dataParser.fetchAllDestinations();
   tripData = await dataParser.fetchTripsForAllTravelers();
-  currentUser = await loginTraveler(43);
+  currentUser = await loginTraveler(45);
   await currentUser.getTrips();
   await currentUser.getMyDestinations(destinationData);
   console.log(currentUser);

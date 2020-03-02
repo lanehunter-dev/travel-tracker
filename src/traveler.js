@@ -36,9 +36,14 @@ class Traveler {
   }
   getPastDestinations() {
     let pastTrips = this.getPastTrips()
-    return pastTrips.forEach(trip => {
-      this.destinations.filter(destinations => destination.id === trip.destinationID)
+    console.log(pastTrips);
+    let pastDestinations = [];
+    pastTrips.forEach(trip => {
+      pastDestinations.push(this.destinations.find(destination => {
+        return destination.id === trip.destinationID
+      }))
     })
+    return pastDestinations;
   }
   getCurrentTrips() {
     return this.trips.filter(trip => {
