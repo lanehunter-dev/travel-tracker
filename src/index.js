@@ -13,17 +13,11 @@ let currentUser;
 let destinationData;
 let tripData;
 
+autoLogin()
 
 $('.login-btn').click(attemptLogin);
-$('h1').click(async function() {
-  // console.log(m < m2);
-  // console.log(await currentUser.getTrips());
-  console.log(currentUser.getNumTravelersOnTripsToday());
-  ;
-  // console.log(currentUser.getCurrentTrips());
-
-  // console.log(await currentUser.getPendingTrips());
-  // console.log(await currentUser.getTotalTripCostPerYear());
+$('#trip-filter').change(function() {
+  domUpdates.displayPastTrips(currentUser);
 })
 
 async function attemptLogin() {
@@ -36,7 +30,13 @@ async function attemptLogin() {
   if (username.includes('traveler') && password === 'travel2020') {
     console.log('valid user & pass');
     let travelerNum = username.slice(8);
-    currentUser = await loginTraveler(travelerNum);
+    currentUser = await loginTraveler(34);
+    await currentUser.getTrips();
+    console.log(currentUser);
+    await currentUser.getMyDestinations(destinationData);
+    domUpdates.showUserDashboard();
+    domUpdates.displayWelcomeMsg(currentUser)
+    domUpdates.displayUserTrips(currentUser);
   } else if (username.includes('traveler') && password !== 'travel2020') {
     console.log('invalid pass');
   } else if (username === 'agency' && password === 'travel2020') {
@@ -51,10 +51,23 @@ async function attemptLogin() {
 
 async function loginTraveler(travelerNum) {
   var data = await dataParser.fetchTraveler(travelerNum);
+
   return new Traveler(data);
 }
 
 async function loginAgency(tripData, destinationData) {
   var travelerData = await dataParser.fetchAllTravelers();
   return new Agent(tripData, destinationData, travelerData);
+}
+
+async function autoLogin() {
+  destinationData = await dataParser.fetchAllDestinations();
+  tripData = await dataParser.fetchTripsForAllTravelers();
+  currentUser = await loginTraveler(43);
+  await currentUser.getTrips();
+  await currentUser.getMyDestinations(destinationData);
+  console.log(currentUser);
+  domUpdates.showUserDashboard();
+  domUpdates.displayWelcomeMsg(currentUser)
+  domUpdates.displayUserTrips(currentUser);
 }

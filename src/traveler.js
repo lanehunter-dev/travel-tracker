@@ -31,7 +31,13 @@ class Traveler {
   }
   getPastTrips() {
     return this.trips.filter(trip => {
-      return moment(trip.date, 'YYYY/MM/DD') < Date.now();
+      return moment(trip.date, 'YYYY/MM/DD') < Date.now() && moment(trip.date, 'YYYY/MM/DD').add(trip.duration, 'days') < Date.now();
+    })
+  }
+  getPastDestinations() {
+    let pastTrips = this.getPastTrips()
+    return pastTrips.forEach(trip => {
+      this.destinations.filter(destinations => destination.id === trip.destinationID)
     })
   }
   getCurrentTrips() {

@@ -28,6 +28,10 @@ body {
   font-weight: 700;
 }
 
+.underline {
+  text-decoration: underline;
+}
+
 header {
   background: white;
   grid-area: header;
@@ -92,7 +96,7 @@ main {
 }
 
 form {
-  display: none;
+  // display: none;
   padding: 3em 0em 4.5em;
   width: 40%;
   border-radius: .3em;
@@ -110,7 +114,7 @@ form {
 }
 
 .card:hover {
-  transform: scale(1.01);
+  transform: scale(1.02);
   transition: 300ms;
 }
 
@@ -128,7 +132,8 @@ form {
 }
 
 #traveler-dashboard {
-  // display: none;
+  display: none;
+  position: relative;
   overflow: scroll;
   background: white;
   height: 75vh;
@@ -144,7 +149,9 @@ form {
 }
 
 .dashboard-header-nav {
-
+  position: absolute;
+  top: 3em;
+  right: 3em;
 }
 
 #traveler-dashboard h2 {
@@ -167,10 +174,15 @@ form {
   position: absolute;
   text-align: center;
   width: 100%;
-  top: 45%;
+  top: 55%;
   opacity: 0;
   z-index: 10;
   transition: 300ms;
+}
+
+.center {
+  text-align: center;
+  margin-top: 5em;
 }
 
 .overlay {
