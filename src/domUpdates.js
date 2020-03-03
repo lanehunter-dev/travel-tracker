@@ -17,6 +17,28 @@ const domUpdates = {
         <h3 class='bold'>Travelers on trips today: ${currentUser.getNumTravelersOnTripsToday()}</h3>
       </div>`)
   },
+  showNewTripBtn: () => {
+    $('header').append(`
+      <button id='book-new-trip-btn'>Book new trip</button>
+    `)
+  },
+  displayDestinationPicker: (destinationData) => {
+    $('.dashboard-body').children().hide();
+    $('.dashboard-header').children().hide();
+    $('#traveler-filter').hide();
+    $('.dashboard-header').append(`<h3 class='bold center filter-display'>Pick a destination!</h3>`)
+
+  },
+  displayNewTripModal: () => {
+    $('header').addClass('blur');
+    $('main').addClass('blur');
+    $('.modal-container').show();
+  },
+  closeModal: () => {
+    $('header').removeClass('blur');
+    $('main').removeClass('blur');
+    $('.modal-container').hide();
+  },
   displayWelcomeMsg: (currentUser) => {
     if (currentUser.id) {
       $('.dashboard-header').prepend(`
