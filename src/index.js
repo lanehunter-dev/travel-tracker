@@ -74,7 +74,6 @@ async function attemptLogin() {
 
 async function loginTraveler(travelerNum) {
   var data = await dataParser.fetchTraveler(travelerNum);
-
   return new Traveler(data);
 }
 
