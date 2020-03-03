@@ -13,7 +13,7 @@ let currentUser;
 let destinationData;
 let tripData;
 
-autoLogin()
+// autoLogin()
 
 $('.login-btn').click(attemptLogin);
 $('#trip-filter').change(() => {
@@ -49,11 +49,16 @@ async function attemptLogin() {
     domUpdates.showUserDashboard();
     domUpdates.displayWelcomeMsg(currentUser)
     domUpdates.displayUserTrips(currentUser);
-  } else if (username.includes('traveler') && password !== 'travel2020') {
-    console.log('invalid pass');
   } else if (username === 'agency' && password === 'travel2020') {
     console.log('valid agent login');
     currentUser = await loginAgency(tripData, destinationData);
+    console.log(currentUser);
+    domUpdates.showAgentDashboard();
+    domUpdates.displayWelcomeMsg(currentUser);
+    domUpdates.displayNumTravelersOnTripsToday(currentUser)
+    domUpdates.displayPendingTrips(currentUser);
+  } else if (username.includes('traveler') && password !== 'travel2020') {
+    console.log('invalid pass');
   } else if (username === 'agency' && password !== 'travel2020') {
     console.log('invalid pass');
   } else {
@@ -75,11 +80,13 @@ async function loginAgency(tripData, destinationData) {
 async function autoLogin() {
   destinationData = await dataParser.fetchAllDestinations();
   tripData = await dataParser.fetchTripsForAllTravelers();
-  currentUser = await loginTraveler(45);
-  await currentUser.getTrips();
-  await currentUser.getMyDestinations(destinationData);
+  currentUser = await loginAgency(tripData, destinationData)
+  // currentUser = await loginTraveler(45);
+  // await currentUser.getTrips();
+  // await currentUser.getMyDestinations(destinationData);
   console.log(currentUser);
-  domUpdates.showUserDashboard();
-  domUpdates.displayWelcomeMsg(currentUser)
-  domUpdates.displayUserTrips(currentUser);
+  // domUpdates.displayUserTrips(currentUser)
+  // domUpdates.showAgentDashboard();
+  // domUpdates.displayWelcomeMsg(currentUser)
+
 }

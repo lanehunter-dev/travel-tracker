@@ -3,18 +3,33 @@ import dataParser from './dataParser.js';
 
 const domUpdates = {
   showUserDashboard: () => {
-    $('#traveler-dashboard').show()
+    $('.dashboard').show()
     $('.login').hide()
   },
-  showNewTripBtn: () => {
-    $('header').append()
+  showAgentDashboard: () => {
+    $('.dashboard').show()
+    $('.login').hide()
+    $('#traveler-filter').hide();
+  },
+  displayNumTravelersOnTripsToday: (currentUser) => {
+    $('.dashboard-header-nav').append(`
+      <div id="traverler-count">
+        <h3 class='bold'>Travelers on trips today: ${currentUser.getNumTravelersOnTripsToday()}</h3>
+      </div>`)
   },
   displayWelcomeMsg: (currentUser) => {
-    $('.dashboard-header').prepend(`
-      <h1>Welcome, ${currentUser.name}!</h1>`);
-    $('.dashboard-header').append(`
-      <h3>Total you've spent on trips this year: $${currentUser.getTotalTripCostPerYear()}</h3>
-      <h3 class='bold center filter-display'>Your Trips:</h3>`)
+    if (currentUser.id) {
+      $('.dashboard-header').prepend(`
+        <h1>Welcome, ${currentUser.name}!</h1>`);
+      $('.dashboard-header').append(`
+        <h3>Total you've spent on trips this year: $${((currentUser.getTotalTripCostPerYear() * .1) + currentUser.getTotalTripCostPerYear()).toFixed(2)}</h3>
+        <h3 class='bold center filter-display'>Your Trips:</h3>`)
+    } else {
+      $('.dashboard-header').prepend(`
+        <h1>Welcome, Agent!</h1>`);
+      $('.dashboard-header').append(`
+        <h3>Total revenue this year: $${(currentUser.getTotalTripCostPerYear() * .1).toFixed(2)}</h3>`)
+    }
   },
   displayUserTrips: (currentUser) => {
     $('.dashboard-body').children().hide();
@@ -73,6 +88,7 @@ const domUpdates = {
     $('.filter-display').html(`<h3 class='bold center filter-display'>Your Trips (current):</h3>`)
   },
   displayPendingTrips: (currentUser) => {
+    console.log(currentUser);
     $('.dashboard-body').children().hide();
     let pendingDestinations = currentUser.getPendingDestinations()
     if (pendingDestinations.length) {
