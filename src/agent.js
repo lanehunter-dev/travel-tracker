@@ -10,13 +10,24 @@ class Agent {
   getPendingTrips() {
     return this.trips.filter(trip => trip.status === "pending")
   }
-  async getTotalTripCostPerYear() {
+  getPendingDestinations() {
+    let pendingTrips = this.getPendingTrips()
+    let pendingDestinations = [];
+    pendingTrips.forEach(trip => {
+      pendingDestinations.push(this.destinations.find(destination => {
+        return destination.id === trip.destinationID
+      }))
+    })
+    return pendingDestinations;
+  }
+  getTotalTripCostPerYear() {
     let subTotal = this.trips.reduce((totalCost, trip) => {
       let place = this.destinations.find(destination => destination.id === trip.destinationID);
       totalCost += (place.estimatedLodgingCostPerDay * trip.duration * trip.travelers);
       totalCost += (place.estimatedFlightCostPerPerson * trip.travelers);
       return totalCost;
     }, 0);
+    console.log(subTotal);
     return subTotal;
   }
   getCurrentTrips() {

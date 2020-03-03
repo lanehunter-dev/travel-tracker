@@ -145,7 +145,7 @@ form {
   margin-left: 2em;
 }
 
-#traveler-dashboard {
+.dashboard {
   display: none;
   position: relative;
   overflow: scroll;
@@ -172,7 +172,7 @@ form {
   font-family: $body-font;
 }
 
-#traveler-dashboard h2 {
+.dashboard h2 {
   margin-bottom: 3em;
 }
 
