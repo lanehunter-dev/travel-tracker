@@ -19,14 +19,33 @@ const domUpdates = {
   },
   showNewTripBtn: () => {
     $('header').append(`
-      <button id='book-new-trip-btn'>Book new trip</button>
+      <button class='top-action-btn book-trip'>Book new trip</button>
     `)
   },
   displayDestinationPicker: (destinationData) => {
     $('.dashboard-body').children().hide();
     $('.dashboard-header').children().hide();
     $('#traveler-filter').hide();
-    $('.dashboard-header').append(`<h3 class='bold center filter-display'>Pick a destination!</h3>`)
+    $('.dashboard-header').append(`<button class='top-action-btn go-back'>Go back to my trips</button><h1 class='bold center filter-display'>Pick a destination!</h1>`)
+    console.log(destinationData);
+    destinationData.forEach(destination => {
+      $('.dashboard-body').append(`<div class="dashboard-entry card">
+        <div class="dashboard-image">
+          <div class='overlay-text'>
+            <h2 class='bold'>Book a trip to ${destination.destination}!
+            </h2>
+          </div>
+          <div class='overlay'></div>
+          <img src=${destination.image} class="card-image">
+        </div>
+        <div class="dashboard-info">
+          <h2 class="bold underline">${destination.destination}</h2>
+          <h3>Estimated Flight Cost Per Person: $${destination.estimatedFlightCostPerPerson}</h3>
+          <h3>Estimated Lodging Cost Per Day (Per Person): $${destination.estimatedLodgingCostPerDay}</h3>
+        </div>
+        <button class='bottom-action-btn'>Book a trip to ${destination.destination}</button>
+      </div>`)
+    });
 
   },
   displayNewTripModal: () => {
@@ -41,6 +60,7 @@ const domUpdates = {
   },
   displayWelcomeMsg: (currentUser) => {
     if (currentUser.id) {
+      $('.filter-display').hide();
       $('.dashboard-header').prepend(`
         <h1>Welcome, ${currentUser.name}!</h1>`);
       $('.dashboard-header').append(`

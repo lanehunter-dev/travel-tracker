@@ -13,12 +13,12 @@ let currentUser;
 let destinationData;
 let tripData;
 
-// autoLogin()
+autoLogin()
 
 $('.login-btn').click(attemptLogin);
-$('header h1').click(() => {
-  domUpdates.displayDestinationPicker(destinationData)
-})
+// $('header h1').click(() => {
+//   domUpdates.displayDestinationPicker(destinationData)
+// })
 $('#trip-filter').change(() => {
   let value = $('#trip-filter').children("option:selected").val();
   if (value === 'all') {
@@ -45,16 +45,6 @@ async function attemptLogin() {
     console.log('valid user & pass');
     let travelerNum = username.slice(8);
     currentUser = await loginTraveler(34);
-    await currentUser.getTrips();
-    console.log(currentUser);
-    await currentUser.getMyDestinations(destinationData);
-    domUpdates.showUserDashboard();
-    domUpdates.displayWelcomeMsg(currentUser)
-    domUpdates.displayUserTrips(currentUser);
-    domUpdates.showNewTripBtn();
-    $('#book-new-trip-btn').click(() => {
-      console.log(55);
-    })
   } else if (username === 'agency' && password === 'travel2020') {
     console.log('valid agent login');
     currentUser = await loginAgency(tripData, destinationData);
@@ -73,8 +63,29 @@ async function attemptLogin() {
 }
 
 async function loginTraveler(travelerNum) {
+  destinationData = await dataParser.fetchAllDestinations();
+  tripData = await dataParser.fetchTripsForAllTravelers();
   var data = await dataParser.fetchTraveler(travelerNum);
-  return new Traveler(data);
+  let currentUser = new Traveler(data)
+  await currentUser.getTrips();
+  await currentUser.getMyDestinations(destinationData);
+  domUpdates.showUserDashboard();
+  domUpdates.displayWelcomeMsg(currentUser)
+  domUpdates.displayUserTrips(currentUser);
+  domUpdates.showNewTripBtn();
+  $('.book-trip').click(() => {
+    domUpdates.displayDestinationPicker(destinationData);
+    console.log(45);
+    $('.go-back').click(() => {
+      console.log('back');
+      domUpdates.displayWelcomeMsg(currentUser)
+      domUpdates.displayUserTrips(currentUser);
+
+    })
+  })
+
+  console.log(currentUser);
+  return currentUser;
 }
 
 async function loginAgency(tripData, destinationData) {
@@ -83,15 +94,5 @@ async function loginAgency(tripData, destinationData) {
 }
 
 async function autoLogin() {
-  destinationData = await dataParser.fetchAllDestinations();
-  tripData = await dataParser.fetchTripsForAllTravelers();
-  currentUser = await loginAgency(tripData, destinationData)
-  // currentUser = await loginTraveler(45);
-  // await currentUser.getTrips();
-  // await currentUser.getMyDestinations(destinationData);
-  console.log(currentUser);
-  // domUpdates.displayUserTrips(currentUser)
-  // domUpdates.showAgentDashboard();
-  // domUpdates.displayWelcomeMsg(currentUser)
-
+  loginTraveler(45)
 }
