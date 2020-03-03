@@ -16,6 +16,9 @@ let tripData;
 // autoLogin()
 
 $('.login-btn').click(attemptLogin);
+$('header h1').click(() => {
+  domUpdates.displayDestinationPicker(destinationData)
+})
 $('#trip-filter').change(() => {
   let value = $('#trip-filter').children("option:selected").val();
   if (value === 'all') {
@@ -30,7 +33,6 @@ $('#trip-filter').change(() => {
     domUpdates.displayPendingTrips(currentUser)
   }
 })
-
 
 async function attemptLogin() {
   event.preventDefault();
@@ -49,6 +51,10 @@ async function attemptLogin() {
     domUpdates.showUserDashboard();
     domUpdates.displayWelcomeMsg(currentUser)
     domUpdates.displayUserTrips(currentUser);
+    domUpdates.showNewTripBtn();
+    $('#book-new-trip-btn').click(() => {
+      console.log(55);
+    })
   } else if (username === 'agency' && password === 'travel2020') {
     console.log('valid agent login');
     currentUser = await loginAgency(tripData, destinationData);
