@@ -29,12 +29,10 @@ const domUpdates = {
     $('.dashboard-header').append(`<button class='top-action-btn go-back'>Go back to my trips</button><h1 class='bold center filter-display'>Pick a destination!</h1>`)
     console.log(destinationData);
     destinationData.forEach(destination => {
-      $('.dashboard-body').append(`<div class="dashboard-entry card">
+      $('.dashboard-body').append(`<div class="dashboard-entry card" id='${destination.id}'>
         <div class="dashboard-image">
-          <div class='overlay-text'>
-            <h2 class='bold'>Book a trip to ${destination.destination}!
-            </h2>
-          </div>
+        <h2 class='bold overlay-text'>Book a trip to ${destination.destination}!
+        </h2>
           <div class='overlay'></div>
           <img src=${destination.image} class="card-image">
         </div>
@@ -42,21 +40,30 @@ const domUpdates = {
           <h2 class="bold underline">${destination.destination}</h2>
           <h3>Estimated Flight Cost Per Person: $${destination.estimatedFlightCostPerPerson}</h3>
           <h3>Estimated Lodging Cost Per Day (Per Person): $${destination.estimatedLodgingCostPerDay}</h3>
+          <button class='bottom-action-btn'>Book a trip to ${destination.destination}</button>
         </div>
-        <button class='bottom-action-btn'>Book a trip to ${destination.destination}</button>
       </div>`)
+
     });
 
   },
-  displayNewTripModal: () => {
+  displayNewTripModal: (destinationID, destinationData) => {
+    console.log(destinationID);
     $('header').addClass('blur');
     $('main').addClass('blur');
-    $('.modal-container').show();
+    $('.modal-container').show()
+    $('.modal-container').append(`<div class="new-trip-modal">
+      <button class="top-action-btn cancel">Cancel</button>
+      <div class="modal-body">
+
+      </div>
+    </div>`);
   },
   closeModal: () => {
     $('header').removeClass('blur');
     $('main').removeClass('blur');
     $('.modal-container').hide();
+    $('.modal-container').html('')
   },
   displayWelcomeMsg: (currentUser) => {
     if (currentUser.id) {

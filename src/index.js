@@ -76,6 +76,13 @@ async function loginTraveler(travelerNum) {
   $('.book-trip').click(() => {
     domUpdates.displayDestinationPicker(destinationData);
     console.log(45);
+    $('.overlay, .overlay-text, .bottom-action-btn').click(() => {
+      let destinationID = event.target.parentNode.parentNode.id;
+      domUpdates.displayNewTripModal(destinationID, destinationData)
+      $('.cancel').click(() => {
+        domUpdates.closeModal();
+      })
+    })
     $('.go-back').click(() => {
       console.log('back');
       domUpdates.displayWelcomeMsg(currentUser)
