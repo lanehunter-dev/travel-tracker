@@ -34,6 +34,19 @@ body {
   text-decoration: underline;
 }
 
+input {
+  font-family: $body-font;
+  font-size: 1em;
+  background: $primary-background;
+  border-radius: .3em;
+  padding: 1em;
+  margin: 1.2em 0;
+  width: 80%;
+  height: 3em;
+  border: none;
+  border-bottom: 2px solid $border-color;
+}
+
 header {
   background: white;
   grid-area: header;
@@ -52,8 +65,8 @@ header {
 
 .bottom-action-btn {
   @include action-button;
-  bottom: 3em;
-  right: 3em;
+  bottom: 1em;
+  right: 1em;
 }
 
 header h1 {
@@ -256,15 +269,29 @@ main {
   @include card;
   position: relative;
   width: 70%;
-  height: 90%;
+  height: fit-content;
   margin: auto;
   z-index: 10;
 }
 
 .modal-body {
+  display: flex;
   padding: 3em;
   height: 100%;
-  background: yellow;
+  flex-flow: wrap;
+}
+
+.modal-body h2 {
+  flex-basis: 100%;
+}
+
+.modal-options {
+  margin-left: 2em;
+}
+
+.modal-options input[type=number] {
+  display: inline;
+  width: 5em;
 }
 
 .blur {
@@ -282,17 +309,4 @@ h4 {
   display: flex;
   justify-content: center;
   flex-flow: wrap;
-}
-
-input {
-  font-family: $body-font;
-  font-size: 1em;
-  background: $primary-background;
-  border-radius: .3em;
-  padding: 1em;
-  margin: 1.2em 0;
-  width: 80%;
-  height: 3em;
-  border: none;
-  border-bottom: 2px solid $border-color;
 }

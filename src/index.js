@@ -1,7 +1,5 @@
 import $ from 'jquery';
 import moment from 'moment'
-let m = moment('01/01/1990', 'MM/DD/YYYY')
-let m2 = moment('01/05/1990', 'MM/DD/YYYY');
 
 import './css/base.scss';
 import domUpdates from './domUpdates.js';
@@ -15,24 +13,9 @@ let tripData;
 
 autoLogin()
 
-$('.login-btn').click(attemptLogin);
-// $('header h1').click(() => {
-//   domUpdates.displayDestinationPicker(destinationData)
-// })
-$('#trip-filter').change(() => {
-  let value = $('#trip-filter').children("option:selected").val();
-  if (value === 'all') {
-    domUpdates.displayUserTrips(currentUser)
-  } else if (value === 'past') {
-    domUpdates.displayPastTrips(currentUser)
-  } else if (value === 'current') {
-    domUpdates.displayCurrentTrips(currentUser)
-  } else if (value === 'upcoming') {
-    domUpdates.displayUpcomingTrips(currentUser)
-  } else if (value === 'pending') {
-    domUpdates.displayPendingTrips(currentUser)
-  }
-})
+
+
+
 
 async function attemptLogin() {
   event.preventDefault();
@@ -66,32 +49,7 @@ async function loginTraveler(travelerNum) {
   destinationData = await dataParser.fetchAllDestinations();
   tripData = await dataParser.fetchTripsForAllTravelers();
   var data = await dataParser.fetchTraveler(travelerNum);
-  let currentUser = new Traveler(data)
-  await currentUser.getTrips();
-  await currentUser.getMyDestinations(destinationData);
-  domUpdates.showUserDashboard();
-  domUpdates.displayWelcomeMsg(currentUser)
-  domUpdates.displayUserTrips(currentUser);
-  domUpdates.showNewTripBtn();
-  $('.book-trip').click(() => {
-    domUpdates.displayDestinationPicker(destinationData);
-    console.log(45);
-    $('.overlay, .overlay-text, .bottom-action-btn').click(() => {
-      let destinationID = event.target.parentNode.parentNode.id;
-      domUpdates.displayNewTripModal(destinationID, destinationData)
-      $('.cancel').click(() => {
-        domUpdates.closeModal();
-      })
-    })
-    $('.go-back').click(() => {
-      console.log('back');
-      domUpdates.displayWelcomeMsg(currentUser)
-      domUpdates.displayUserTrips(currentUser);
-
-    })
-  })
-
-  console.log(currentUser);
+  currentUser = new Traveler(data)
   return currentUser;
 }
 
@@ -101,5 +59,61 @@ async function loginAgency(tripData, destinationData) {
 }
 
 async function autoLogin() {
-  loginTraveler(45)
+  await loginTraveler(45)
+  showUserDashboard()
+}
+
+async function showUserDashboard() {
+  await currentUser.getTrips();
+  await currentUser.getMyDestinations(destinationData);
+  domUpdates.showUserDashboard();
+  domUpdates.displayWelcomeMsg(currentUser);
+  domUpdates.displayUserTrips(currentUser);
+  domUpdates.showNewTripBtn();
+}
+
+$('.dashboard-header-nav').on('change', () => {
+  console.log('succy');
+  let value = $('#trip-filter').children("option:selected").val();
+  if (value === 'all') {
+    domUpdates.displayUserTrips(currentUser)
+  } else if (value === 'past') {
+    domUpdates.displayPastTrips(currentUser)
+  } else if (value === 'current') {
+    domUpdates.displayCurrentTrips(currentUser)
+  } else if (value === 'upcoming') {
+    domUpdates.displayUpcomingTrips(currentUser)
+  } else if (value === 'pending') {
+    domUpdates.displayPendingTrips(currentUser)
+  }
+})
+
+$(document).on('click', '.book-trip', displayDestinationPicker)
+$(document).on('click', '.go-back', goBack)
+$(document).on('click', '.cancel', closeModal)
+$(document).on('click', '.confirm', confirmTrip)
+$(document).on('click', '.overlay, .overlay-text, .bottom-action-btn', showModal)
+
+function displayDestinationPicker() {
+  domUpdates.displayDestinationPicker(destinationData);
+}
+
+function goBack() {
+  domUpdates.showUserDashboard();
+  domUpdates.displayWelcomeMsg(currentUser);
+  domUpdates.displayUserTrips(currentUser);
+}
+
+function closeModal() {
+  domUpdates.closeModal();
+}
+
+function showModal() {
+  let destinationID = parseInt(event.target.parentNode.parentNode.id);
+  domUpdates.displayNewTripModal(destinationID, destinationData)
+}
+
+function confirmTrip() {
+  closeModal();
+  goBack();
 }

@@ -23,11 +23,8 @@ const dataParser = {
     let data = await dataParser.fetchTripsForAllTravelers();
     return data.trips.filter(trip => trip.userID === travelerNum);
   },
-  formatTripRequest: () => {
-
-  },
   sendTripRequest: async () => {
-
+    
   }
 }
 

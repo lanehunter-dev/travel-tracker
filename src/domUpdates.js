@@ -5,11 +5,21 @@ const domUpdates = {
   showUserDashboard: () => {
     $('.dashboard').show()
     $('.login').hide()
+    $('.dashboard-header-nav').append(`<div id="traveler-filter">
+      <label for="trip-filter">Filter trips:</label>
+      <select id="trip-filter">
+        <option value="all">All</option>
+        <option value="past">Past</option>
+        <option value="current">Current</option>
+        <option value="upcoming">Upcoming</option>
+        <option value="pending">Pending</option>
+      </select>
+    </div>`)
   },
   showAgentDashboard: () => {
     $('.dashboard').show()
     $('.login').hide()
-    $('#traveler-filter').hide();
+    $('#traveler-filter').html('');
   },
   displayNumTravelersOnTripsToday: (currentUser) => {
     $('.dashboard-header-nav').append(`
@@ -25,9 +35,8 @@ const domUpdates = {
   displayDestinationPicker: (destinationData) => {
     $('.dashboard-body').children().hide();
     $('.dashboard-header').children().hide();
-    $('#traveler-filter').hide();
-    $('.dashboard-header').append(`<button class='top-action-btn go-back'>Go back to my trips</button><h1 class='bold center filter-display'>Pick a destination!</h1>`)
-    console.log(destinationData);
+    $('.dashboard-header-nav').html('');
+    $('.dashboard-header').append(`<button class='top-action-btn go-back'>Go back to my trips</button><h1 class='bold center'>Pick a destination!</h1>`)
     destinationData.forEach(destination => {
       $('.dashboard-body').append(`<div class="dashboard-entry card" id='${destination.id}'>
         <div class="dashboard-image">
@@ -43,20 +52,25 @@ const domUpdates = {
           <button class='bottom-action-btn'>Book a trip to ${destination.destination}</button>
         </div>
       </div>`)
-
     });
-
   },
   displayNewTripModal: (destinationID, destinationData) => {
-    console.log(destinationID);
+    let destination = destinationData.find(destination => destination.id === destinationID)
     $('header').addClass('blur');
     $('main').addClass('blur');
     $('.modal-container').show()
     $('.modal-container').append(`<div class="new-trip-modal">
       <button class="top-action-btn cancel">Cancel</button>
       <div class="modal-body">
-
+        <h2>Go to ${destination.destination}:</h2>
+        <img src=${destination.image} class="card-image">
+        <div class="modal-options">
+          <p>How many travelers?: <input type='number'></p>
+          <p>Start date: <input type='date' min='2020-03-04' id='start-date'></p>
+          <p>End date: <input type='date' min='2020-03-04' id='end-date'></p>
+        </div>
       </div>
+      <button class="bottom-action-btn confirm">Confirm Booking!</button>
     </div>`);
   },
   closeModal: () => {
@@ -67,12 +81,14 @@ const domUpdates = {
   },
   displayWelcomeMsg: (currentUser) => {
     if (currentUser.id) {
-      $('.filter-display').hide();
+      $('.dashboard-body').children().hide();
+      $('.dashboard-header').children().hide();
+      $('.go-back').hide();
       $('.dashboard-header').prepend(`
         <h1>Welcome, ${currentUser.name}!</h1>`);
       $('.dashboard-header').append(`
         <h3>Total you've spent on trips this year: $${((currentUser.getTotalTripCostPerYear() * .1) + currentUser.getTotalTripCostPerYear()).toFixed(2)}</h3>
-        <h3 class='bold center filter-display'>Your Trips:</h3>`)
+        <h3 class='bold center filter-display'></h3>`)
     } else {
       $('.dashboard-header').prepend(`
         <h1>Welcome, Agent!</h1>`);
