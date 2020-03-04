@@ -1,18 +1,27 @@
 @mixin card {
-  background: white;
-  padding: 3em;
-  border-radius: .3em;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  transition: 300ms;
+	background: white;
+	padding: 3em;
+	border-radius: .3em;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23);
+	transition: 300ms;
 }
 
 @mixin action-button {
-  position: absolute;
-  cursor: pointer;
-  font-size: 1em;
-  background: $accent-color;
-  border-radius: .3em;
-  padding: 1em;
-  height: 3em;
-  border: none;
+	position: absolute;
+	cursor: pointer;
+	font-size: 1em;
+	border-radius: .3em;
+	padding: 1em;
+	height: 3em;
+	border: none;
+	background: $accent-color;
+}
+
+@mixin basic-input {
+	font-size: 1em;
+	border-radius: .3em;
+	padding: 1em;
+	width: 80%;
+	height: 3em;
+	border: none;
 }

@@ -1,0 +1,122 @@
+.dashboard {
+	display: none;
+	position: relative;
+	overflow: scroll;
+	height: 75vh;
+	width: 100%;
+	padding: 3em;
+	border-radius: .3em;
+	box-shadow: $box-shadow;
+	background: white;
+}
+
+.dashboard-entry {
+	margin-top: 1em;
+	position: relative;
+	display: flex;
+}
+
+.dashboard-info {
+	margin-left: 2em;
+}
+
+.dashboard-header {
+	margin-bottom: 3em;
+	width: 100%;
+}
+
+.dashboard-header-nav {
+	position: absolute;
+	top: 3em;
+	right: 3em;
+}
+
+#trip-filter {
+	@include basic-input;
+	width: 8em;
+	margin-left: 1em;
+	border: 1px solid $dark;
+}
+
+#traveler-filter {
+	display: none;
+}
+
+.dashboard h2 {
+	margin-bottom: 3em;
+}
+
+.dashboard-header h1 {
+	padding-left: 1em;
+	padding-bottom: 1.5em;
+	margin-bottom: 1em;
+	border-bottom: 1px solid $dark;
+}
+
+.dashboard-image {
+	position: relative;
+	cursor: pointer;
+	transition: 300ms;
+}
+
+.overlay-text {
+	font-weight: bold;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	top: 45%;
+	opacity: 0;
+	z-index: 10;
+	transition: 300ms;
+	color: $dark;
+}
+
+.overlay {
+	transition: 300ms;
+	opacity: 0;
+	position: absolute;
+	height: 99%;
+	width: 100%;
+	background: $light-overlay;
+}
+
+.dashboard-image:hover .overlay-text {
+	transition: 300ms;
+	opacity: 1;
+}
+
+.dashboard-image:hover .overlay {
+	transition: 300ms;
+	background: $light-overlay;
+	position: absolute;
+	height: 99%;
+	width: 100%;
+	opacity: 1;
+}
+
+.dashboard-image:hover {
+	transition: 300ms;
+}
+
+.card {
+	background: white;
+	padding: 3em;
+	border-radius: .3em;
+	box-shadow: $box-shadow;
+	transition: 300ms;
+}
+
+.card:hover {
+	transform: scale(1.02);
+	transition: 300ms;
+}
+
+.card-image {
+	width: 30em;
+}
+
+.bottom-action-btn {
+	@include action-button;
+	bottom: 1em;
+	right: 1em;
+}
