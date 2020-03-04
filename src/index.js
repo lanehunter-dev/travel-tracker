@@ -13,10 +13,6 @@ let tripData;
 
 autoLogin()
 
-
-
-
-
 async function attemptLogin() {
   event.preventDefault();
   destinationData = await dataParser.fetchAllDestinations();
@@ -73,7 +69,6 @@ async function showUserDashboard() {
 }
 
 $('.dashboard-header-nav').on('change', () => {
-  console.log('succy');
   let value = $('#trip-filter').children("option:selected").val();
   if (value === 'all') {
     domUpdates.displayUserTrips(currentUser)
@@ -91,7 +86,7 @@ $('.dashboard-header-nav').on('change', () => {
 $(document).on('click', '.book-trip', displayDestinationPicker)
 $(document).on('click', '.go-back', goBack)
 $(document).on('click', '.cancel', closeModal)
-$(document).on('click', '.confirm', confirmTrip)
+$(document).on('click', '.confirm', validateForm)
 $(document).on('click', '.overlay, .overlay-text, .bottom-action-btn', showModal)
 
 function displayDestinationPicker() {
@@ -111,9 +106,32 @@ function closeModal() {
 function showModal() {
   let destinationID = parseInt(event.target.parentNode.parentNode.id);
   domUpdates.displayNewTripModal(destinationID, destinationData)
+  $('#start-date, #end-date').attr('min', new Date().toISOString().slice(0, 10));
 }
 
-function confirmTrip() {
+function validateForm() {
+  event.preventDefault();
+  let startDate = moment($('#start-date').val());
+  let endDate = moment($('#end-date').val());
+  let duration = moment.duration(endDate.diff(startDate)).days()
+  if (duration > 0 && $('#num-travelers').val() > 0) {
+    confirmTrip()
+  } else {
+    alert('Please input valid parameters')
+  }
+}
+
+async function confirmTrip() {
+  let numTravelers = parseInt($('#num-travelers').val());
+  let startDate = moment($('#start-date').val());
+  console.log(startDate);
+  let endDate = moment($('#end-date').val());
+  let duration = moment.duration(endDate.diff(startDate)).days();
+  startDate = startDate.format('YYYY/MM/DD')
+  let destinationID = parseInt(event.target.parentNode.id)
+  await dataParser.sendTripRequest(currentUser, numTravelers, startDate, duration, destinationID)
+  await loginTraveler(currentUser.id);
+  await showUserDashboard();
   closeModal();
   goBack();
 }

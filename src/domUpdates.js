@@ -5,21 +5,11 @@ const domUpdates = {
   showUserDashboard: () => {
     $('.dashboard').show()
     $('.login').hide()
-    $('.dashboard-header-nav').append(`<div id="traveler-filter">
-      <label for="trip-filter">Filter trips:</label>
-      <select id="trip-filter">
-        <option value="all">All</option>
-        <option value="past">Past</option>
-        <option value="current">Current</option>
-        <option value="upcoming">Upcoming</option>
-        <option value="pending">Pending</option>
-      </select>
-    </div>`)
+    $('#traveler-filter').show()
   },
   showAgentDashboard: () => {
     $('.dashboard').show()
     $('.login').hide()
-    $('#traveler-filter').html('');
   },
   displayNumTravelersOnTripsToday: (currentUser) => {
     $('.dashboard-header-nav').append(`
@@ -35,7 +25,7 @@ const domUpdates = {
   displayDestinationPicker: (destinationData) => {
     $('.dashboard-body').children().hide();
     $('.dashboard-header').children().hide();
-    $('.dashboard-header-nav').html('');
+    $('#traveler-filter').hide()
     $('.dashboard-header').append(`<button class='top-action-btn go-back'>Go back to my trips</button><h1 class='bold center'>Pick a destination!</h1>`)
     destinationData.forEach(destination => {
       $('.dashboard-body').append(`<div class="dashboard-entry card" id='${destination.id}'>
@@ -59,19 +49,20 @@ const domUpdates = {
     $('header').addClass('blur');
     $('main').addClass('blur');
     $('.modal-container').show()
-    $('.modal-container').append(`<div class="new-trip-modal">
-      <button class="top-action-btn cancel">Cancel</button>
-      <div class="modal-body">
-        <h2>Go to ${destination.destination}:</h2>
-        <img src=${destination.image} class="card-image">
-        <div class="modal-options">
-          <p>How many travelers?: <input type='number'></p>
-          <p>Start date: <input type='date' min='2020-03-04' id='start-date'></p>
-          <p>End date: <input type='date' min='2020-03-04' id='end-date'></p>
+    $('.modal-container').append(`
+      <form class="new-trip-modal" id="${destination.id}">
+        <button class="top-action-btn cancel">Cancel</button>
+        <div class="modal-body">
+          <h2>Go to ${destination.destination}:</h2>
+          <img src=${destination.image} class="card-image">
+          <div class="modal-options">
+            <p>How many travelers?: <input type='number' id='num-travelers' required></p>
+            <p>Start date: <input type='date' id='start-date' required></p>
+            <p>End date: <input type='date' id='end-date' required></p>
+          </div>
         </div>
-      </div>
-      <button class="bottom-action-btn confirm">Confirm Booking!</button>
-    </div>`);
+        <input type='submit' class='confirm' value='Confirm Booking!'>
+      </form>`);
   },
   closeModal: () => {
     $('header').removeClass('blur');
@@ -87,8 +78,7 @@ const domUpdates = {
       $('.dashboard-header').prepend(`
         <h1>Welcome, ${currentUser.name}!</h1>`);
       $('.dashboard-header').append(`
-        <h3>Total you've spent on trips this year: $${((currentUser.getTotalTripCostPerYear() * .1) + currentUser.getTotalTripCostPerYear()).toFixed(2)}</h3>
-        <h3 class='bold center filter-display'></h3>`)
+        <h3>Total you've spent on trips this year: $${((currentUser.getTotalTripCostPerYear() * .1) + currentUser.getTotalTripCostPerYear()).toFixed(2)}</h3>`)
     } else {
       $('.dashboard-header').prepend(`
         <h1>Welcome, Agent!</h1>`);
@@ -108,7 +98,6 @@ const domUpdates = {
         </div>
       </div>`)
     });
-    $('.filter-display').html(`<h3 class='bold center filter-display'>Your Trips (all):</h3>`)
   },
   displayPastTrips: (currentUser) => {
     $('.dashboard-body').children().hide();
@@ -129,7 +118,6 @@ const domUpdates = {
       $('.dashboard-body').children().hide();
       $('.dashboard-body').append(`<h1 class='underline center'>No past trips</h1>`)
     }
-    $('.filter-display').html(`<h3 class='bold center filter-display'>Your Trips (past):</h3>`)
   },
   displayCurrentTrips: (currentUser) => {
     $('.dashboard-body').children().hide();
@@ -150,10 +138,8 @@ const domUpdates = {
       $('.dashboard-body').children().hide();
       $('.dashboard-body').append(`<h1 class='underline center'>No currently active trips</h1>`)
     }
-    $('.filter-display').html(`<h3 class='bold center filter-display'>Your Trips (current):</h3>`)
   },
   displayPendingTrips: (currentUser) => {
-    console.log(currentUser);
     $('.dashboard-body').children().hide();
     let pendingDestinations = currentUser.getPendingDestinations()
     if (pendingDestinations.length) {
@@ -172,7 +158,6 @@ const domUpdates = {
       $('.dashboard-body').children().hide();
       $('.dashboard-body').append(`<h1 class='underline center'>No currently pending trips</h1>`)
     }
-    $('.filter-display').html(`<h3 class='bold center filter-display'>Your Trips (pending):</h3>`)
   },
   displayUpcomingTrips: (currentUser) => {
     $('.dashboard-body').children().hide();
@@ -193,7 +178,6 @@ const domUpdates = {
       $('.dashboard-body').children().hide();
       $('.dashboard-body').append(`<h1 class='underline center'>No upcoming trips</h1>`)
     }
-    $('.filter-display').html(`<h3 class='bold center filter-display'>Your Trips (upcoming):</h3>`)
   }
 };
 
