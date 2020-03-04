@@ -1,105 +1,50 @@
-# Webpack Starter Kit
+# Freudian Trip, the Travel Tracker!
 
-## Clone This Repo
+### Abstract
+*Freudian Trip is the travel booking site you've always wanted, with the ability to browse destinations, view estimated costs, and book trips to your dream destinations!*  
+**This Travel Tracker app is the final project of my second quarter at the Turing School of Software & Design.
 
-That's right, _clone_ not fork. You will use this repo multiple times, but you can only fork a repository once. So here is what you need to do to clone the repo and still be able to push changes to your repo:
+## Screenshots
+#### Login Page
+![login page](https://i.postimg.cc/FzgwsGwP/Screen-Shot-2020-03-04-at-1-51-38-AM.png)
+#### Traveler Dashboard
+![traveler dashboard](https://i.postimg.cc/Bnwk6jwG/Screen-Shot-2020-03-04-at-1-52-21-AM.png)
+#### Destination Picker
+![destination picker](https://i.postimg.cc/0NM3J9LK/Screen-Shot-2020-03-04-at-1-52-51-AM.png)
+#### Booking a New Trip
+![modal for booking a trip](https://i.postimg.cc/HLqNwfgZ/Screen-Shot-2020-03-04-at-1-53-50-AM.png)
+#### Agent Dashboard Header
+![agent dashboard header](https://i.postimg.cc/htpMsvk3/Screen-Shot-2020-03-04-at-1-59-34-AM.png)
 
-1. Clone down this repo. Since you don't want to name your project "webpack-starter-kit", you can use an optional argument when you run `git clone` (you replace the `[...]` with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Remove the default remote: `git remote rm origin` (notice that `git remote -v` not gives you back nothing)
-1. Create a new repo on GitHub with the name of `[what you want to name the repo]` to be consistent with naming
-1. Copy the address that you would use to clone down this repo - something like `git@github.com:...`
-1. Add this remote to your cloned down repo: `git remote add origin [address you copied in the previous step]` - do not include the brackets
+### Project Goals
+The goal of this solo project was to build an app from the ground up (*in 1 week, whew...*) that interacts with an API. Data is pulled from one of 3 databases and is dynamically displayed as you navigate. The user also has the ability to post a new data object to the API through a simple, intuitive UI.
+In addition to the above functionalities, there is also an alternative agent login that can view data for all users.
+The UI/UX was designed by me and inspired by TripAdvisor's aesthetic.
 
-Now try to commit something and push it up to your new repo. If everything is setup correctly, you should see the changes on GitHub.
+### Technologies/Paradigms Used
+- JavaScript - OOP
+- JS Class Inheritance
+- jQuery
+- HTML
+- CSS/SCSS
+- fetch API
+- Mocha/Chai testing
 
-## Setup
+### Challenges
+- Designing this app in such a time cruch was quite a challenge. The first several days were spent planning out the class structure and mapping out the responsibility of each required functionality. This was the first time a project spec didn't specify any class structure, and this experience was extremely rewarding.
+- Many behaviors had the opportunity to belong to several different classes within the codebase. Deciding where these not-so-obvious behaviors should go required a bit of creativity mixed with research into industry best practices.
 
-After one person has gone through the steps of cloning down this repo and editing the remote, everyone should clone down the repo. 
+### Future Additions
+- Add in more standard functionalities such as the ability to log out, persist dashboards w/ session storage, and search bars.
+- I'd like to spend more time with the UI/UX. Although I'm happy with the overall experience of the app, I still would love to give it bit more TLC.
+- Testing using spies and mocking out fetch calls
+- Better error handling for invalid inputs
+- Loading animations
+- Responsive design
 
-Then install the library dependencies. Run:
-
-```bash
-npm install
-```
-
-To verify that it is setup correctly, run `npm start` in your terminal. Go to `http://localhost:8080/` and you should see a page with some `h1` text and a pink background. If that's the case, you're good to go. Enter `control + c` in your terminal to stop the server at any time.
-
-## Where to Add Your Code
-
-### JavaScript
-
-You have to be very intentional with where you add your feature code. This repo uses a tool called [webpack](https://webpack.js.org/) to combine many JavaScript files into one big file. Webpack enables you to have many, separate JavaScript files to keep your code organized and readable. Webpack expects all of your code files to be in a specific place, or else it doesn't know how to combine them all behind the scenes.
-
-**Create all of your feature code files in the `src` directory.**
-
-Since code is separated into multiple files, you need to use the `import` and `export` syntax to share code across file.
-
-Here is a video that walks through some information about [import and export](https://www.youtube.com/watch?v=_3oSWwapPKQ). There are a lot of resources out there about `import` and `export`, and resources will sometimes call them `ES6 modules`. It's something you will see in React and beyond.
-
-### HTML
-
-Add the HTML you need in the `index.html` file in the `./src` directory. There is some boilerplate HTML that exists from the start that you can modify.
-
-### CSS (SCSS/SASS)
-
-This project is setup to use SCSS/SASS files by default instead of your regular CSS files. Add your SCSS files in the `src/css` directory. There is a `base.scss` file already there, but you can change this file and add multiple SCSS files in this directory.
-
-This might sound weird, but you need to `import` your SCSS files in the JavaScript entry file (`index.js`) for the styles to be applied to your HTML. The example `base.scss` file has already been imported in the JavaScript entry file as an example.
-
-### Images
-
-Add your image files in the `src/images` directory. Similar to CSS files, you need to `import` image files in the JavaScript entry file (`index.js`). Then go into the HTML and add an `img` element with the `src` attribute pointing to the `images` directory. There is an example in the `index.html` file for you to see.
-
-## How to View Your Code in Action
-
-In the terminal, run:
-
-```bash
-npm start
-```
-
-You will see a bunch of lines output to your terminal. One of those lines will be something like:
-
-```bash
-Project is running at http://localhost:8080/
-```
-
-Go to `http://localhost:8080/` in your browser to view your code running in the browser.
-
----
-
-## Test Files Organization
-
-Similar to feature code, your test code needs to be put in a specific place for it to run successfully.
-
-**Put all of your test files in the `test` directory.** As a convention, all test filenames should end with `-test.js`. For instance: `box-test.js`.
-
-## Running Your Tests
-
-Run your test suite using the command:
-
-```bash
-npm test
-```
-
-The test results will output to the terminal.
-
----
-
-## Linting Your Code
-
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit - the linter is still running successfully.
-
-Your linter will look at the JavaScript files you have within the `src` directory and the `test` directory. 
-
-## Webpack?
-
-If you look in the `package.json` file, you'll see one of the library dependencies called `webpack`. If you're interested in learning more about what Webpack is and how it works behind the scenes, take a look through the [Webpack configuration documentation](https://webpack.js.org/concepts/).
-
-## Deploying to GitHub Pages
-
-_If you are finished with the functionality and testing of your project_, then you can consider deploying your project to the web! This way anyone can play it without cloning down your repo.
-
-[GitHub Pages](https://pages.github.com/) is a great way to deploy your project to the web. Don't worry about this until your project is free of bugs and well tested!
-
-If you _are_ done, you can follow [this procedure](./gh-pages-procedure.md) to get your project live on GitHub Pages.
+### Setup
+- Clone down the repo 
+- Change into the project directory in your command line
+- Install NPM
+- Run `npm start`
+- Copy and paste the provided localhost url provided in the command line
