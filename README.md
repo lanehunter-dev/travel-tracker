@@ -47,4 +47,8 @@ The UI/UX was designed by me and inspired by TripAdvisor's aesthetic.
 - Change into the project directory in your command line
 - Install NPM
 - Run `npm start`
-- Copy and paste the provided localhost url provided in the command line
+- Go to the provided `localhost` url
+- Enter the username `traveler1` (or `traveler` + any number 1-50)
+    - Enter the username `agency` to login as a "travel agency"
+- Enter the password `travel2020`
+
