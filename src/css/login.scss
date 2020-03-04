@@ -1,0 +1,27 @@
+.login button {
+	@include basic-input;
+	cursor: pointer;
+	margin-top: .3em;
+	margin-left: 10%;
+	background: $accent-color;
+}
+
+.login {
+	padding: 3em 0 4.5em;
+	width: 40%;
+	border-radius: .3em;
+	flex-flow: wrap;
+	background: white;
+	box-shadow: $box-shadow;
+}
+
+.input-container {
+	display: flex;
+	justify-content: center;
+	flex-flow: wrap;
+}
+
+.login h2 {
+	padding-left: 2em;
+	border-left: 5px solid $accent-color;
+}

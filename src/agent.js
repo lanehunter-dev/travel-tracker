@@ -27,7 +27,6 @@ class Agent {
       totalCost += (place.estimatedFlightCostPerPerson * trip.travelers);
       return totalCost;
     }, 0);
-    console.log(subTotal);
     return subTotal;
   }
   getCurrentTrips() {
