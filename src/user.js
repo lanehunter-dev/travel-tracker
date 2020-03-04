@@ -14,13 +14,16 @@ class User {
 		return data;
 	}
 	getMyDestinations(destinationData) {
-		return this.trips.forEach(trip => {
-			this.destinations.push(
+		let destinationList = [];
+		this.trips.forEach(trip => {
+			destinationList.push(
 				destinationData.find(
 					destination => destination.id === trip.destinationID
 				)
 			);
 		});
+		this.destinations = destinationList;
+		return destinationList;
 	}
 	getPendingTrips() {
 		return this.trips.filter(trip => trip.status === "pending");
@@ -94,7 +97,7 @@ class User {
 		});
 		return pastDestinations;
 	}
-	getTotalTripCostPerYear() {
+	getTotalTripCostPerYear(destinationData) {
 		let subTotal = this.trips.reduce((totalCost, trip) => {
 			let place = this.destinations.find(
 				destination => destination.id === trip.destinationID
