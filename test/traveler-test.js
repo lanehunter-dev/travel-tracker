@@ -1,6 +1,7 @@
 import chai from "chai";
 const expect = chai.expect;
 import Traveler from "../src/traveler.js";
+import User from "../src/user.js";
 import travelerData from "../data/traveler-data-sample.js";
 let traveler;
 import dataParser from "../src/dataParser";
@@ -20,11 +21,12 @@ describe("traveler", function() {
 
 	it("should have default parameters", function() {
 		expect(traveler).to.deep.equal({
+			travelers: { id: 1, name: "Ham Leadbeater", travelerType: "relaxer" },
+			trips: [],
+			destinations: [],
 			id: 1,
 			name: "Ham Leadbeater",
-			travelerType: "relaxer",
-			trips: [],
-			destinations: []
+			travelerType: "relaxer"
 		});
 	});
 

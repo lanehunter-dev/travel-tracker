@@ -80,7 +80,14 @@ const domUpdates = {
 		$(".modal-container").html("");
 	},
 	displayWelcomeMsg: currentUser => {
+		let yearTotal;
 		if (currentUser.id) {
+			yearTotal = parseInt(
+				(
+					currentUser.getTotalTripCostPerYear() * 0.1 +
+					currentUser.getTotalTripCostPerYear()
+				).toFixed(2)
+			).toLocaleString();
 			$(".dashboard-body")
 				.children()
 				.hide();
@@ -91,17 +98,15 @@ const domUpdates = {
 			$(".dashboard-header").prepend(`
         <h1>Welcome, ${currentUser.name}!</h1>`);
 			$(".dashboard-header").append(`
-        <h3>Total you've spent on trips this year: $${(
-					currentUser.getTotalTripCostPerYear() * 0.1 +
-					currentUser.getTotalTripCostPerYear()
-				).toFixed(2)}</h3>`);
+        <h3>Total you've spent on trips this year: $${yearTotal}</h3>`);
 		} else {
+			yearTotal = parseInt(
+				(currentUser.getTotalTripCostPerYear() * 0.1).toFixed(2)
+			).toLocaleString();
 			$(".dashboard-header").prepend(`
         <h1>Welcome, Agent!</h1>`);
 			$(".dashboard-header").append(`
-        <h3>Total revenue this year: $${(
-					currentUser.getTotalTripCostPerYear() * 0.1
-				).toFixed(2)}</h3>`);
+        <h3>Total revenue this year: $${yearTotal}</h3>`);
 		}
 	},
 	displayUserTrips: currentUser => {

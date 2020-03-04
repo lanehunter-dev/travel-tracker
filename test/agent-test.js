@@ -1,6 +1,7 @@
 import chai from "chai";
 const expect = chai.expect;
-import Agent from "../src/agent";
+import Agent from "../src/agent.js";
+import User from "../src/user.js";
 import travelerData from "../data/traveler-data-sample.js";
 import destinationData from "../data/destination-data-sample";
 import tripData from "../data/trip-data-sample";
@@ -12,9 +13,9 @@ let agent;
 describe("Agent", () => {
 	beforeEach(() => {
 		agent = new Agent(
+			travelerData.travelers,
 			tripData.trips,
-			destinationData.destinations,
-			travelerData.travelers
+			destinationData.destinations
 		);
 	});
 

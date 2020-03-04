@@ -51,10 +51,7 @@ async function attemptLogin() {
 		showUserDashboard();
 	} else if (username === "agency" && password === "travel2020") {
 		currentUser = await loginAgency(tripData, destinationData);
-		domUpdates.showAgentDashboard();
-		domUpdates.displayWelcomeMsg(currentUser);
-		domUpdates.displayNumTravelersOnTripsToday(currentUser);
-		domUpdates.displayPendingTrips(currentUser);
+		showAgentDashboard();
 	} else if (username.includes("traveler") && password !== "travel2020") {
 	} else if (username === "agency" && password !== "travel2020") {
 		alert("Invalid password");
@@ -73,16 +70,22 @@ async function loginTraveler(travelerNum) {
 
 async function loginAgency(tripData, destinationData) {
 	var travelerData = await dataParser.fetchAllTravelers();
-	return new Agent(tripData, destinationData, travelerData);
+	let agent = new Agent(travelerData, tripData, destinationData);
+	return agent;
 }
 
 async function showUserDashboard() {
 	await currentUser.getTrips();
 	await currentUser.getMyDestinations(destinationData);
-	domUpdates.showUserDashboard();
-	domUpdates.displayWelcomeMsg(currentUser);
-	domUpdates.displayUserTrips(currentUser);
+	goBack();
 	domUpdates.showNewTripBtn();
+}
+
+function showAgentDashboard() {
+	domUpdates.showAgentDashboard();
+	domUpdates.displayWelcomeMsg(currentUser);
+	domUpdates.displayNumTravelersOnTripsToday(currentUser);
+	domUpdates.displayPendingTrips(currentUser);
 }
 
 function displayDestinationPicker() {
@@ -123,7 +126,6 @@ function validateForm() {
 async function confirmTrip() {
 	let numTravelers = parseInt($("#num-travelers").val());
 	let startDate = moment($("#start-date").val());
-	console.log(startDate);
 	let endDate = moment($("#end-date").val());
 	let duration = moment.duration(endDate.diff(startDate)).days();
 	startDate = startDate.format("YYYY/MM/DD");
